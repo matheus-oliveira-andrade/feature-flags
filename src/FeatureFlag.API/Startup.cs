@@ -1,3 +1,4 @@
+using FeatureFlag.API.FeatureFilters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +34,8 @@ namespace FeatureFlag.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Feature flag API", Version = "v1" });
             });
 
-            services.AddFeatureManagement();
+            services.AddFeatureManagement()
+                    .AddFeatureFilter<BusinessTimeWindowFeatureFilter>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
